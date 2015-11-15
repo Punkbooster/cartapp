@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %title Cartapp
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %nav#nav
+      %div#page_nav
+        = link_to "Home", root_path
+        = link_to "About", page_about_path
+        = link_to "FAQ", page_faqs_path
+        = link_to "Contact", page_contact_path
+        = link_to "Shop", products_path
+      %div#sign_in
+        - if user_signed_in?
+          = link_to "Sign Out", destroy_user_session_path, method: :delete
+        - else  
+          = link_to "Sign In", new_user_session_path
+          = link_to "Sign Up", new_user_registration_path
+    %div#main_wrap  
+      %p.notice= notice
+      %p.alert= alert
+      = yield
