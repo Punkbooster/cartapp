@@ -1,4 +1,5 @@
 class CartController < ApplicationController
+  before_action :authenticate_user!, escept: [:index]
   
   def add
   	id = params[:id]

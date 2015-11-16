@@ -1,5 +1,9 @@
 %h1 Your cart
-= link_to "Empty your cart", cart_clear_path
+- if @cart.empty?
+  %p Your cart currently empty.
+-else
+  = link_to "Empty your cart", cart_clear_path
+
 %br
 - total = 0
 %ul
