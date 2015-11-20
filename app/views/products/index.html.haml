@@ -8,16 +8,20 @@
       %th Price
       %th{:colspan => "3"}
   %tbody
-    - @products.each do |product|
-      %tr
-        %td= product.title
-        %td= product.description
-        %td= product.price
-        %td= link_to 'Show', product
-        %td= link_to 'Edit', edit_product_path(product)
-        %td= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }
-        %td= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }
-        %td
-          %a{:href => "/cart/#{product.id}"} Add to cart
+    %br
+      - Category.all.each do |category|
+        %p= link_to category.name, products_path(category: category.name) 
+      - @products.each do |product|
+        %tr
+          %td= product.title
+          %td= product.description
+          %td= product.price
+          %td= product.category.name
+          %td= link_to 'Show', product
+          %td= link_to 'Edit', edit_product_path(product)
+          %td= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }
+          %td= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }
+          %td
+            %a{:href => "/cart/#{product.id}"} Add to cart
 %br
   = link_to 'New Product', new_product_path
