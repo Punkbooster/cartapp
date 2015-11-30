@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
+  before_action :admin_validation, only: [:new, :edit, :destroy]
+
   def index
     if params[:category].blank?
       @products = Product.all
@@ -55,6 +57,13 @@ class ProductsController < ApplicationController
   end
 
   private
+
+    def admin_validation
+      if current_user.role !='admin'
+        redirect_to root_path
+      end
+    end
+
     def set_product
       @product = Product.find(params[:id])
     end
