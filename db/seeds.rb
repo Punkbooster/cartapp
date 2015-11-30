@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Category.destroy_all
+Product.destroy_all
+
+categories = Category.create([{ name: 'Laptops'}, { name:'Phones'}, {name:'Tablets'} ])
+
+p "Created #{Category.count} categories"
+
+			
