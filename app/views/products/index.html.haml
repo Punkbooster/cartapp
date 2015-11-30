@@ -15,16 +15,23 @@
   %tbody
     - @products.each do |product|
       %tr
-        %td= product.title
-        %td= product.description
-        %td= number_to_currency(product.price, unit: "$")
-        %td= product.category.name
-        %td= image_tag product.image.url(:thumb)
-        %td= link_to 'Show', product
-        %td= link_to 'Edit', edit_product_path(product)
-        %td= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }
-        %td= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }
-        %td
-          %a{:href => "/cart/#{product.id}"} Add to cart
-%br
-  = link_to 'New Product', new_product_path
+        - if current_user.role.nil?
+          %td= product.title
+          %td= product.description
+          %td= number_to_currency(product.price, unit: "$")
+          %td= product.category.name
+          %td= image_tag product.image.url(:thumb)
+          %td= link_to 'Show', product
+        - else
+          %td= product.title
+          %td= product.description
+          %td= number_to_currency(product.price, unit: "$")
+          %td= product.category.name
+          %td= image_tag product.image.url(:thumb)
+          %td= link_to 'Show', product  
+          %td= link_to 'Edit', edit_product_path(product)
+          %td= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }
+          %td
+            %a{:href => "/cart/#{product.id}"} Add to cart
+          %br
+            = link_to 'New Product', new_product_path
