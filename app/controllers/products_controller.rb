@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   before_action :admin_validation, only: [:new, :edit, :destroy]
+  before_action :authenticate_user!, only: [:index]
 
   def index
     if params[:category].blank?

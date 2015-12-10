@@ -17,4 +17,5 @@
         Quantity: #{quantity}
     - total += quantity *product.price
   %p 
-    %b= number_to_currency(total, :unit => '$')         
+    %b= number_to_currency(total, :unit => '$')        
+  %b= link_to "Create Order", root_path, notice: 'Product was successfully updated.'
